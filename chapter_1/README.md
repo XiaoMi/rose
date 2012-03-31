@@ -31,7 +31,7 @@ ROSE
 
 * 然后需要在你的项目的pom文件中添加：
 
-<p>
+<pre>
 <code>
     <dependency>  
         <groupId>net.paoding</groupId>  
@@ -49,7 +49,7 @@ ROSE
         <version>1.0-SNAPSHOT</version>  
     </dependency>  
 </code>
-</p>
+</pre>
 * 这是三个最基础的框架包。
 
 ###2）一个controller长什么样？###
