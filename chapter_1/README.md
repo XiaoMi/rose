@@ -31,22 +31,25 @@ ROSE
 
 * 然后需要在你的项目的pom文件中添加：
 
-><dependency>  
->        <groupId>net.paoding</groupId>  
->        <artifactId>paoding-rose</artifactId>  
->        <version>1.0-SNAPSHOT</version>  
->    </dependency>  
->    <dependency>  
->        <groupId>net.paoding</groupId>  
->        <artifactId>paoding-rose-jade</artifactId>  
->        <version>1.1-SNAPSHOT</version>  
->    </dependency>  
->    <dependency>  
->        <groupId>net.paoding</groupId>  
->        <artifactId>paoding-rose-scanning</artifactId>  
->        <version>1.0-SNAPSHOT</version>  
->    </dependency>  
-
+<p>
+<code>
+    <dependency>  
+        <groupId>net.paoding</groupId>  
+        <artifactId>paoding-rose</artifactId>  
+        <version>1.0-SNAPSHOT</version>  
+    </dependency>  
+    <dependency>  
+        <groupId>net.paoding</groupId>  
+        <artifactId>paoding-rose-jade</artifactId>  
+        <version>1.1-SNAPSHOT</version>  
+    </dependency>  
+    <dependency>  
+        <groupId>net.paoding</groupId>  
+        <artifactId>paoding-rose-scanning</artifactId>  
+        <version>1.0-SNAPSHOT</version>  
+    </dependency>  
+</code>
+</p>
 * 这是三个最基础的框架包。
 
 ###2）一个controller长什么样？###
