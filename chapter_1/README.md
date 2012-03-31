@@ -53,7 +53,8 @@ rose手册第一章：入门指引
 * 这是三个最基础的框架包。
 
 ###2）一个controller长什么样？###
-<code>
+
+~~~~~ java
 @Path("/")  
 public class TestController {  
     @Get("hello")  
@@ -61,7 +62,8 @@ public class TestController {
         return "@a";  
     }  
 }  
-</code>
+~~~~~
+
 * http://localhost/hello
 
 * 将会返回:a。就是这么简单。
