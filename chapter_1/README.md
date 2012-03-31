@@ -31,23 +31,25 @@ rose手册第一章：入门指引
 * 也许还需要一个nexus，用来搭建自己的maven仓库（这些都是门槛啊，知道为什么java用的人在全球多，而在中国php的人似乎更多，因为我们的基础设施太落后了）。nexus的作用是配合maven工作。（54chen正在向sonatype申请将rose项目push到sonatype的官方库中，成功后这将省略掉这一步）
 
 * 然后需要在你的项目的pom文件中添加：
+
 ~~~~~ xml
-    <dependency>  
-        <groupId>net.paoding</groupId>  
-        <artifactId>paoding-rose</artifactId>  
-        <version>1.0-SNAPSHOT</version>  
-    </dependency>  
-    <dependency>  
-        <groupId>net.paoding</groupId>  
-        <artifactId>paoding-rose-jade</artifactId>  
-        <version>1.1-SNAPSHOT</version>  
-    </dependency>  
-    <dependency>  
-        <groupId>net.paoding</groupId>  
-        <artifactId>paoding-rose-scanning</artifactId>  
-        <version>1.0-SNAPSHOT</version>  
-    </dependency>  
+<dependency>  
+    <groupId>net.paoding</groupId>  
+    <artifactId>paoding-rose</artifactId>  
+    <version>1.0-SNAPSHOT</version>  
+</dependency>  
+<dependency>  
+    <groupId>net.paoding</groupId>  
+    <artifactId>paoding-rose-jade</artifactId>  
+    <version>1.1-SNAPSHOT</version>  
+</dependency>  
+<dependency>  
+    <groupId>net.paoding</groupId>  
+    <artifactId>paoding-rose-scanning</artifactId>  
+    <version>1.0-SNAPSHOT</version>  
+</dependency>  
 ~~~~~
+
 * 这是三个最基础的框架包。
 
 ###2）一个controller长什么样？###
