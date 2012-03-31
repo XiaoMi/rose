@@ -30,23 +30,11 @@ ROSE
 * 也许还需要一个nexus，用来搭建自己的maven仓库（这些都是门槛啊，知道为什么java用的人在全球多，而在中国php的人似乎更多，因为我们的基础设施太落后了）。nexus的作用是配合maven工作。（54chen正在向sonatype申请将rose项目push到sonatype的官方库中，成功后这将省略掉这一步）
 
 * 然后需要在你的项目的pom文件中添加：
-`
-    <dependency>  
-        <groupId>net.paoding</groupId>  
-        <artifactId>paoding-rose</artifactId>  
-        <version>1.0-SNAPSHOT</version>  
-    </dependency>  
-    <dependency>  
-        <groupId>net.paoding</groupId>  
-        <artifactId>paoding-rose-jade</artifactId>  
-        <version>1.1-SNAPSHOT</version>  
-    </dependency>  
-    <dependency>  
-        <groupId>net.paoding</groupId>  
-        <artifactId>paoding-rose-scanning</artifactId>  
-        <version>1.0-SNAPSHOT</version>  
-    </dependency>  
-`
+
+<div class="chen-hl"><div class="bar"></div><ol class="dp-xml" start="1"><li class="alt"><span><span class="tag">&lt;</span><span class="tag-name">dependency</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;</span><span class="tag-name">groupId</span><span class="tag">&gt;</span><span>net.paoding</span><span class="tag">&lt;/</span><span class="tag-name">groupId</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;</span><span class="tag-name">artifactId</span><span class="tag">&gt;</span><span>paoding-rose</span><span class="tag">&lt;/</span><span class="tag-name">artifactId</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;</span><span class="tag-name">version</span><span class="tag">&gt;</span><span>1.0-SNAPSHOT</span><span class="tag">&lt;/</span><span class="tag-name">version</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="tag">&lt;/</span><span class="tag-name">dependency</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="tag">&lt;</span><span class="tag-name">dependency</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;</span><span class="tag-name">groupId</span><span class="tag">&gt;</span><span>net.paoding</span><span class="tag">&lt;/</span><span class="tag-name">groupId</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;</span><span class="tag-name">artifactId</span><span class="tag">&gt;</span><span>paoding-rose-jade</span><span class="tag">&lt;/</span><span class="tag-name">artifactId</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;</span><span class="tag-name">version</span><span class="tag">&gt;</span><span>1.1-SNAPSHOT</span><span class="tag">&lt;/</span><span class="tag-name">version</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="tag">&lt;/</span><span class="tag-name">dependency</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="tag">&lt;</span><span class="tag-name">dependency</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;</span><span class="tag-name">groupId</span><span class="tag">&gt;</span><span>net.paoding</span><span class="tag">&lt;/</span><span class="tag-name">groupId</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;</span><span class="tag-name">artifactId</span><span class="tag">&gt;</span><span>paoding-rose-scanning</span><span class="tag">&lt;/</span><span class="tag-name">artifactId</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;</span><span class="tag-name">version</span><span class="tag">&gt;</span><span>1.0-SNAPSHOT</span><span class="tag">&lt;/</span><span class="tag-name">version</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="tag">&lt;/</span><span class="tag-name">dependency</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li></ol></div>
+
+
+
 * 这是三个最基础的框架包。
 
 ###2）一个controller长什么样？###
