@@ -8,18 +8,18 @@ rose手册计划
 * rose手册第一章：入门指引 (chapter_1 or http://www.54chen.com/life/rose-manual-1.html)
 * rose手册第二章：配置与使用 (chapter_2 or http://www.54chen.com/java-ee/rose-manual-2.html)
 * rose手册第三章：框架功能参考
-	*   controller层：url对照规则与返回结果规则
-	*   controller层：拦截器支持
-	*   controller层：ErrHandle支持
-	*   controller层：自定义http参数支持
-	*   controller层：一闪而过的信息，flash支持
-	*   controller层：门户必备portal支持
-	*   controller层：门户必备pipe支持
-	*   controller层：上传文件
-	*   DAO层：DAO的基本匹配规则
-	*   DAO层：DAO的数据源选择 
-	*   DAO层：分库分表设置
-	*   DAO层：DAO的发展计划
+	* 3.1  controller层：url对照规则与返回结果规则
+	* 3.2  controller层：拦截器支持
+	* 3.3  controller层：ErrHandle支持
+	* 3.4  controller层：自定义http参数支持
+	* 3.5  controller层：一闪而过的信息，flash支持
+	* 3.6  controller层：门户必备portal支持
+	* 3.7  controller层：门户必备pipe支持
+	* 3.8  controller层：上传文件
+	* 3.9  DAO层：DAO的基本匹配规则
+	* 4.0  DAO层：DAO的数据源选择 
+	* 4.1  DAO层：分库分表设置
+	* 4.2  DAO层：DAO的发展计划
 
 * rose手册第四章：安全
 * rose手册第五章：FAQ 常见问题
