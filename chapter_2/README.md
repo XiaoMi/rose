@@ -184,7 +184,7 @@ src/main/resources/applicationContext.xml是spring环境的油门，所有包的
 
 	<!-- 自动扫描 -->
 	<context:annotation-config />
-	<context:component-scan base-package="com.54chen">
+	<context:component-scan base-package="com.chen">
 	</context:component-scan>
 	 
 </beans>
