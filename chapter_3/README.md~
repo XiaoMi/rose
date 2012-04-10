@@ -41,17 +41,17 @@ Rose框架内部采用"匹配->执行"两阶段逻辑。Rose内部结构具有�
 
     ROOT
 
-        GET="HomeController#index" package="com.xiaonei.xxx.controllers" 
+    GET="HomeController#index" package="com.xiaonei.xxx.controllers" 
 
     /about
 
-        GET="HomeController#about" package="com.xiaonei.xxx.controllers" 
+    GET="HomeController#about" package="com.xiaonei.xxx.controllers" 
 
     /book
 
-        GET="BookController#list" package="com.xiaonei.xxx.controllers.sub" 
+    GET="BookController#list" package="com.xiaonei.xxx.controllers.sub" 
 
-        POST="BookController#add" package="com.xiaonei.xxx.controllers.sub" 
+    POST="BookController#add" package="com.xiaonei.xxx.controllers.sub" 
 
     /book/
 
@@ -61,8 +61,7 @@ Rose框架内部采用"匹配->执行"两阶段逻辑。Rose内部结构具有�
 
     /help
 
-        GET="HomeController#help" package="com.xiaonei.xxx.controllers"
-
+    GET="HomeController#help" package="com.xiaonei.xxx.controllers"
 
 ROOT代表这是一个根地址，也就是 http://localhost/ 代表的地址；  
 
