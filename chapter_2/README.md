@@ -244,9 +244,8 @@ public class HelloController {
 
 ~~~~~
 
+__EOF__
 
-2.6 从数据库的hello world
---------------------------
+* 动态更新版本地址在：https://github.com/XiaoMi/rose/tree/master/chapter_2
+* 文中所提及的代码在：https://github.com/XiaoMi/rose/rose-example
 
-2.7 更多特性简介
-----------------
