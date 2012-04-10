@@ -219,9 +219,9 @@ public class HelloController {
 }
 ~~~~~
 
-[Get注解是rose框架提供的标识一个http访问是get还是post或者是其他，并且会将path与get中的字符串连接成一个url]
-上述代码可以从浏览器访问：http://localhost/。
-下述代码可以从浏览器访问：http://localhost/hello/world [注意path与get中的参数]。
+* [Get注解是rose框架提供的标识一个http访问是get还是post或者是其他，并且会将path与get中的字符串连接成一个url]
+* 上述代码可以从浏览器访问：http://localhost/。
+* 下述代码可以从浏览器访问：http://localhost/hello/world [注意path与get中的参数]。
 
 ~~~~~java
 /**
