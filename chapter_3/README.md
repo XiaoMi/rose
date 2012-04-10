@@ -32,7 +32,7 @@ Servlet规范以“边走边看”的方式来处理请求， 当服务器接收
                 <dispatcher>FORWARD</dispatcher>
                 <dispatcher>INCLUDE</dispatcher>
         </filter-mapping>
-~~~~~xml
+~~~~~
 
 大多数请况下，filter-mapping 应配置在所有Filter Mapping的最后。 不能将 FORWARD、INCLUDE 的 dispatcher 去掉，否则forward、 include的请求Rose框架将拦截不到。  
 
