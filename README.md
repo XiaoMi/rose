@@ -6,7 +6,7 @@ rose手册计划
 章节计划
 ========
 * rose手册第一章：入门指引 (chapter_1 or http://www.54chen.com/life/rose-manual-1.html)
-* rose手册第二章：配置与使用 制作中... (chapter_2)
+* rose手册第二章：配置与使用 (chapter_2 or http://www.54chen.com/java-ee/rose-manual-2.html)
 * rose手册第三章：框架功能参考
 	*   controller层：url对照规则与返回结果规则
 	*   controller层：拦截器支持
