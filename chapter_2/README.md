@@ -36,6 +36,7 @@ rose手册第二章：配置与使用
 ----------------------
 ###1）点火：基础的pom文件###
 打开2.3建立好的项目，打开pom.xml，添加下面的段落到project中：
+
 ~~~~~xml
 	<dependencies>
 		<dependency>
@@ -63,7 +64,9 @@ rose手册第二章：配置与使用
 		</dependency>
 	</dependencies>
 ~~~~~
+
 上述是rose环境最基础的依赖包。再添加一点常见的编译设置：
+
 ~~~~~xml
 	<build>
 		<resources>
@@ -121,10 +124,12 @@ rose手册第二章：配置与使用
 		</plugins>
 	</build>
 ~~~~~
+
 上述是编译设置，也是放在project段落里。
 
 ###2）松离合：必不可少的web.xml###
 在src/main/webapp/WEB-INF文件夹下建立web.xml:
+
 ~~~~~xml
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -163,8 +168,10 @@ rose手册第二章：配置与使用
 	</filter-mapping> 
 </web-app>
 ~~~~~
+
 ###3）踩油门：applicationContext.xml###
 src/main/resources/applicationContext.xml是spring环境的油门，所有包的扫描和启动都在这里定义：
+
 ~~~~~xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -191,6 +198,7 @@ src/main/resources/applicationContext.xml是spring环境的油门，所有包的
 * 打开HelloController这个类
 * 在public class HelloController添加注解@Path("")  [Path注解是rose框架提供的标识每个controller的对外访问时的基础路径]
 * 在HelloController中添加方法
+
 ~~~~~java
 /**
  * @author 54chen(陈臻) [chenzhen@xiaomi.com czhttp@gmail.com]
@@ -210,9 +218,11 @@ public class HelloController {
     }
 }
 ~~~~~
+
 [Get注解是rose框架提供的标识一个http访问是get还是post或者是其他，并且会将path与get中的字符串连接成一个url]
 上述代码可以从浏览器访问：http://localhost/。
 下述代码可以从浏览器访问：http://localhost/hello/world [注意path与get中的参数]。
+
 ~~~~~java
 /**
  * @author 54chen(陈臻) [chenzhen@xiaomi.com czhttp@gmail.com]
@@ -233,6 +243,8 @@ public class HelloController {
 }
 
 ~~~~~
+
+
 2.6 从数据库的hello world
 --------------------------
 
