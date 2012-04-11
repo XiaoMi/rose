@@ -37,7 +37,7 @@ rose手册第三章：框架功能参考
 
 ####3)实现 web API
 
-* 首先新建一个类，这个类的类名*必须*以“Controller”结尾：  
+首先新建一个类，这个类的类名必须以“Controller”结尾：  
 
     @Path("myforum")
     public class ForumController {
@@ -45,7 +45,7 @@ rose手册第三章：框架功能参考
 
 注意标注在类(class)上的注解“@Path("myforum")”，这意味着，这个类中定义的所有API的URI，都必须以“myforum”开头，比如“/myforum/xxx”和“/myforum/yyy”等（但“myforum”不一定是整个URI的第一级，比如“/aaa/myforum/bbb”）。  
 
-* 接着，实现第一个API——“GET http://github.com/myforum/topic”：  
+接着，实现第一个API——“GET http://github.com/myforum/topic”：  
 
     @Path("myforum")
     public class ForumController {
@@ -58,7 +58,8 @@ rose手册第三章：框架功能参考
 
 因为是“GET”方法，所以在该方法上标注“@Get("")”，URI“/myforum/topic”中的“myforum”已经在“@Path("myforum")”中定义过了，所以只剩下“topic”，于是写“@Get("topic")”。  
 
-* 再看第二个API——“GET http://github.com/myforum/topic/123”，以前一个的唯一区别是，后面多了个“/123”，表示主帖id，而这个id当然不是固定的，只有用户点击链接发来请求时才能知道，肿么办？  
+再看第二个API——“GET http://github.com/myforum/topic/123”。  
+跟前一个的唯一区别是，后面多了个“/123”，表示主帖id，而这个id当然不是固定的，只有用户点击链接发来请求时才能知道，肿么办？  
 没关系，rose支持正则表达式！可以这么写：  
 
     @Get("topic/{topicId:[0-9]+}")
@@ -69,7 +70,7 @@ rose手册第三章：框架功能参考
 
 与前一个API相比，多了段“/{topicId:[0-9]+}”。正则表达式被大括号"{}"包围，格式为“{ paramName : regularExpression }”，只有请求的URI能被正则表达式匹配时，才会执行这个方法，而被匹配的值将被保存在名为“topicId”的参数中。  
 
-* 同理，实现第三个API，稍微复杂一点：  
+同理，实现第三个API，稍微复杂一点：  
 
     @Get("topic/{topicId:[0-9]+}/comment/{commentId:[0-9]+}")
     public String showComment(@Param("topicId") int topicId, @Param("commentId") int commentId) {
@@ -77,7 +78,7 @@ rose手册第三章：框架功能参考
         return "comment";
     }
 
-* 最后两个API使用POST方法，其他与前面相同：  
+最后两个API使用POST方法，其他与前面相同：  
 
     @Post("topic")
     public String createTopic(){
@@ -130,13 +131,13 @@ rose手册第三章：框架功能参考
 
 ####4) 更多细节
 
-* 关于URI路径的映射  
 除了上面例子中的做法（@Path("")，@Get("")和@Post("")），还可以通过包路径来规划URI。  
 
 比如前面例子中的Controller，在API不变的前提下，还可以这么做：
 
  * 1.在controllers路径下新建一个叫做“myforum”的文件夹。
- * 2.将ForumController从“xxx.controllers”移动到“xxx.controllers.myforum”，并改成下面这样：  
+ * 2.将ForumController从“xxx.controllers”移动到“xxx.controllers.myforum”  
+并改成下面这样：  
 
     @Path("")
     public class ForumController {
@@ -178,7 +179,7 @@ comment.jsp的代码如下：
 总结一句话，通过rose提供类net.paoding.rose.web.var.Model来设置变量名和变量值，然后在视图文件中用“${paramName}”的方式得到变量值。  
 变量的值可以是String，boolean，数字，数组，对象(JavaBean)。  
 
-* 如果是对象，使用方法如下：  
+如果是对象，使用方法如下：  
 
     javaBean：
     public class Bean{
@@ -206,7 +207,7 @@ comment.jsp的代码如下：
     输出为：
     bean里的值：this_is_a_bean
 
-* 如果是个数组，可以结合[JSTL](http://jstl.java.net/)对数组循环访问：  
+如果是个数组，可以结合[JSTL](http://jstl.java.net/)对数组循环访问：  
 
     controller中的方法：
     @Get("test")
@@ -235,7 +236,8 @@ rose中，controller方法的返回值有下面几种规则：
 
 * 1.返回普通字符串，如上所述，最常用的做法，渲染视图文件并返回。
 * 2.以“@”开头的字符串，比如“return "@HelloWorld";”，会将“@”后面的字符串“HelloWorld”作为结果返回；
-* 3.以“@json:”开头的字符串，比如:  
+* 3.以“@json:”开头的字符串
+比如:  
 
     @Get("json")
     public String returnJson(){
