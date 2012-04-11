@@ -15,8 +15,7 @@ rose手册第三章：框架功能参考
 * 创建一个主帖
 * 创建一个跟贴
 ####2)设计 web API
-然后让我们来规划一个[REST](http://zh.wikipedia.org/wiki/REST)风格的 web API :  
-（“GET”和“POST”是指[HTTP1.1](http://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE)中的请求方法）  
+然后让我们来规划一个[REST](http://zh.wikipedia.org/wiki/REST)风格的 web API :（“GET”和“POST”是指[HTTP1.1](http://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE)中的请求方法）  
 
 * 显示主帖列表
  * GET http://github.com/myforum/topic
@@ -28,8 +27,11 @@ rose手册第三章：框架功能参考
  * POST http://github.com/myforum/topic
 * 创建一个跟贴
  * POST http://github.com/myforum/topic/123/comment
+
 可以发现一个共同点，所有API中，URI部分的第一级都是“/myforum”（但这并不是规定，仅仅为了演示）。  
+
 ####3)实现 web API
+
 首先新建一个类，这个类的类名_必须_以“Controller”结尾：  
 
     @Path("myforum")
@@ -39,6 +41,7 @@ rose手册第三章：框架功能参考
 注意标注在类(class)上的注解“@Path("myforum")”，这意味着，这个类中定义的所有API的URI，都必须以“myforum”开头，比如“/myforum/xxx”和“/myforum/yyy”等（但“myforum”不一定是整个URI的第一级，比如“/aaa/myforum/bbb”）。  
 
 接着，实现第一个API——“GET http://github.com/myforum/topic”：
+
     @Path("myforum")
     public class ForumController {
     
@@ -48,6 +51,7 @@ rose手册第三章：框架功能参考
             return "topiclist";
         }
     }
+
 因为是“GET”方法，所以在该方法上标注“@Get("")”，URI“/myforum/topic”中的“myforum”已经在“@Path("myforum")”中定义过了，所以只剩下“topic”，于是写“@Get("topic")”。  
 
 再看第二个API——“GET http://github.com/myforum/topic/123”，以前一个的唯一区别是，后面多了个“/123”，表示主帖id，而这个id当然不是固定的，只有用户点击链接发来请求时才能知道，肿么办？  
@@ -62,6 +66,7 @@ rose手册第三章：框架功能参考
 与前一个API相比，多了段“/{topicId:[0-9]+}”。正则表达式被大括号"{}"包围，格式为“{ paramName : regularExpression }”，只有请求的URI能被正则表达式匹配时，才会执行这个方法，而被匹配的值将被保存在名为“topicId”的参数中。  
 
 同理，实现第三个API，稍微复杂一点：
+
     @Get("topic/{topicId:[0-9]+}/comment/{commentId:[0-9]+}")
     public String showComment(@Param("topicId") int topicId, @Param("commentId") int commentId) {
         //显示单个跟贴
@@ -118,9 +123,12 @@ rose手册第三章：框架功能参考
     }
 
 至此，一个贴吧功能的Controller就编写完成了。
+
 ####4) 更多细节
+
 * 关于URI路径的映射
 除了上面例子中的做法（@Path("")，@Get("")和@Post("")），还可以通过包路径来规划URI。  
+
 比如前面例子中的Controller，在API不变的前提下，还可以这么做：
  * 1.在controllers路径下新建一个叫做“myforum”的文件夹。
  * 2.将ForumController从“xxx.controllers”移动到“xxx.controllers.myforum”，并改成下面这样：
@@ -135,11 +143,13 @@ rose手册第三章：框架功能参考
         }
         ... ...
     }
-只是将“@Path("myforum")”改成了“@Path("")”。  
-这样做的好处是可以让项目中的代码组织清晰。
+
+只是将“@Path("myforum")”改成了“@Path("")”。这样做的好处是可以让项目中的代码组织清晰。
 
 ###3.1.2) 返回结果规则
+
 ####1) 渲染页面并返回
+
 web开发中最常规的做法是，运行Servlet中的方法，最后将渲染好的页面内容返回。下面说说rose是怎么做的。  
 上面的贴吧例子中，每个方法的返回值都是一个普通字符串，比如“comment”，意思是，找到web项目中“webapp/views”路径下名叫“comment”的视图文件，比如“comment.jsp”，用这个视图文件来渲染网页结果并返回。  
 comment.jsp的代码如下：
@@ -150,6 +160,7 @@ comment.jsp的代码如下：
         回复内容：${commentContent}
     </body>
     ...
+
 页面中有两个变量——name和commentContent，变量的值是在java代码中设置的，如下：
 
     @Get("topic/{topicId:[0-9]+}/comment/{commentId:[0-9]+}")
@@ -191,7 +202,7 @@ comment.jsp的代码如下：
     输出为：
     bean里的值：this_is_a_bean
 
-* 如果是个数组，可以结合JSTL对数组循环访问：
+* 如果是个数组，可以结合[JSTL](http://jstl.java.net/)对数组循环访问：
 
     controller中的方法：
     @Get("test")
@@ -217,6 +228,7 @@ comment.jsp的代码如下：
 
 ####2) 还有几种规则？
 rose中，controller方法的返回值有下面几种规则：
+
 * 1.返回普通字符串，如上所述，最常用的做法，渲染视图文件并返回。
 * 2.以“@”开头的字符串，比如“return "@HelloWorld";”，会将“@”后面的字符串“HelloWorld”作为结果返回；
 * 3.以“@json:”开头的字符串，比如:
@@ -228,9 +240,12 @@ rose中，controller方法的返回值有下面几种规则：
     }
 
 将会返回一个字符串（jo.toString()），并自动将“HttpServletResponse”中的“contentType”设置为“application/json”。
+
 * 4.【不推荐使用】以“r:”开头的字符串，比如“return "r:/aaa";”，等效于调用“javax.servlet.http.HttpServletResponse.sendRedirect("/aaa")”，将执行301跳转。
 * 5.【不推荐使用】以“a:”开头的字符串，比如“return "a:/bbb";”，将会携带参数再次匹配roseTree，找到controller中某个方法并执行，相当于“javax.servlet.RequestDispatcher.forward(request, response)”。
+
 ###3.1.3) 原理
+
 Rose 是一个基于Servlet规范、Spring“规范”的WEB开发框架。  
 
 Rose 框架通过在web.xml配置过滤器拦截并处理匹配的web请求，如果一个请求应该由在Rose框架下的类来处理， 该请求将在Rose调用中完成对客户端响应. 如果一个请求在Rose中没有找到合适的类来为他服务，Rose将把该请求移交给web容器的其他组件来处理。  
