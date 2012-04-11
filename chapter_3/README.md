@@ -4,8 +4,11 @@ rose手册第三章：框架功能参考
 3.1 controller层：url对照规则与返回结果规则
 ---------------
 ###3.1.1) url对照规则——最简单的例子
+
 先看看怎样把url和某个方法对应起来。为了方便说明，现在我们来一起完成一个极简版的贴吧。  
+
 ####1)贴吧需要什么功能？
+
 贴吧中当然会有很多“主帖”（topic），“主帖”下会有很多“跟帖”（comment）。  
 一般，贴吧中最基本的，会有下面这几个功能需要我们完成：  
 
@@ -14,7 +17,9 @@ rose手册第三章：框架功能参考
 * 显示单个跟贴
 * 创建一个主帖
 * 创建一个跟贴
+
 ####2)设计 web API
+
 然后让我们来规划一个[REST](http://zh.wikipedia.org/wiki/REST)风格的 web API :（“GET”和“POST”是指[HTTP1.1](http://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE)中的请求方法）  
 
 * 显示主帖列表
@@ -32,7 +37,7 @@ rose手册第三章：框架功能参考
 
 ####3)实现 web API
 
-首先新建一个类，这个类的类名_必须_以“Controller”结尾：  
+* 首先新建一个类，这个类的类名_必须_以“Controller”结尾：  
 
     @Path("myforum")
     public class ForumController {
@@ -40,7 +45,7 @@ rose手册第三章：框架功能参考
 
 注意标注在类(class)上的注解“@Path("myforum")”，这意味着，这个类中定义的所有API的URI，都必须以“myforum”开头，比如“/myforum/xxx”和“/myforum/yyy”等（但“myforum”不一定是整个URI的第一级，比如“/aaa/myforum/bbb”）。  
 
-接着，实现第一个API——“GET http://github.com/myforum/topic”：
+* 接着，实现第一个API——“GET http://github.com/myforum/topic”：
 
     @Path("myforum")
     public class ForumController {
@@ -54,7 +59,7 @@ rose手册第三章：框架功能参考
 
 因为是“GET”方法，所以在该方法上标注“@Get("")”，URI“/myforum/topic”中的“myforum”已经在“@Path("myforum")”中定义过了，所以只剩下“topic”，于是写“@Get("topic")”。  
 
-再看第二个API——“GET http://github.com/myforum/topic/123”，以前一个的唯一区别是，后面多了个“/123”，表示主帖id，而这个id当然不是固定的，只有用户点击链接发来请求时才能知道，肿么办？  
+* 再看第二个API——“GET http://github.com/myforum/topic/123”，以前一个的唯一区别是，后面多了个“/123”，表示主帖id，而这个id当然不是固定的，只有用户点击链接发来请求时才能知道，肿么办？  
 没关系，rose支持正则表达式！可以这么写：
 
     @Get("topic/{topicId:[0-9]+}")
@@ -65,7 +70,7 @@ rose手册第三章：框架功能参考
 
 与前一个API相比，多了段“/{topicId:[0-9]+}”。正则表达式被大括号"{}"包围，格式为“{ paramName : regularExpression }”，只有请求的URI能被正则表达式匹配时，才会执行这个方法，而被匹配的值将被保存在名为“topicId”的参数中。  
 
-同理，实现第三个API，稍微复杂一点：
+* 同理，实现第三个API，稍微复杂一点：
 
     @Get("topic/{topicId:[0-9]+}/comment/{commentId:[0-9]+}")
     public String showComment(@Param("topicId") int topicId, @Param("commentId") int commentId) {
@@ -73,7 +78,7 @@ rose手册第三章：框架功能参考
         return "comment";
     }
 
-最后两个API使用POST方法，其他与前面相同：
+* 最后两个API使用POST方法，其他与前面相同：
 
     @Post("topic")
     public String createTopic(){
@@ -126,10 +131,11 @@ rose手册第三章：框架功能参考
 
 ####4) 更多细节
 
-* 关于URI路径的映射
+* 关于URI路径的映射  
 除了上面例子中的做法（@Path("")，@Get("")和@Post("")），还可以通过包路径来规划URI。  
 
 比如前面例子中的Controller，在API不变的前提下，还可以这么做：
+
  * 1.在controllers路径下新建一个叫做“myforum”的文件夹。
  * 2.将ForumController从“xxx.controllers”移动到“xxx.controllers.myforum”，并改成下面这样：
 
