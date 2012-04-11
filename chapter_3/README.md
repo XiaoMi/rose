@@ -8,6 +8,7 @@ rose手册第三章：框架功能参考
 ####1)贴吧需要什么功能？
 贴吧中当然会有很多“主帖”（topic），“主帖”下会有很多“跟帖”（comment）。  
 一般，贴吧中最基本的，会有下面这几个功能需要我们完成：  
+
 * 显示主帖列表
 * 显示单个主帖和它的跟贴
 * 显示单个跟贴
@@ -16,6 +17,7 @@ rose手册第三章：框架功能参考
 ####2)设计 web API
 然后让我们来规划一个[REST](http://zh.wikipedia.org/wiki/REST)风格的 web API :  
 （“GET”和“POST”是指[HTTP1.1](http://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE)中的请求方法）  
+
 * 显示主帖列表
  * GET http://github.com/myforum/topic
 * 显示单个主帖和它的跟贴
