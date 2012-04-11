@@ -3,7 +3,123 @@ rose手册第三章：框架功能参考
 
 3.1 controller层：url对照规则与返回结果规则
 ---------------
-###1) 原理
+###3.1.1) 最简单的例子
+先看看怎样让一次请求执行某一个方法。为了方便说明，现在我们来一起完成一个极简版的贴吧。  
+####1)贴吧需要什么功能？
+贴吧中当然会有很多“主帖”（topic），“主帖”下会有很多“跟帖”（comment）。  
+一般，贴吧中最基本的，会有下面这几个功能需要我们完成：  
+* 显示主帖列表
+* 显示单个主帖和它的跟贴
+* 显示单个跟贴
+* 创建一个主帖
+* 创建一个跟贴
+####2)设计 web API
+然后让我们来规划一个[REST](http://zh.wikipedia.org/wiki/REST)风格的 web API :  
+（“GET”和“POST”是指[HTTP1.1](http://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE)中的请求方法）  
+* 显示主帖列表
+ * GET http://github.com/myforum/topic
+* 显示单个主帖和它的跟贴
+ * GET http://github.com/myforum/topic/123
+* 显示单个跟贴
+ * GET http://github.com/myforum/topic/123/comment/456
+* 创建一个主帖
+ * POST http://github.com/myforum/topic
+* 创建一个跟贴
+ * POST http://github.com/myforum/topic/123/comment
+可以发现一个共同点，所有API中，URI部分的第一级都是“/myforum”（但这并不是规定，仅仅为了演示）。  
+####3)实现 web API
+首先新建一个类，这个类的类名_必须_以“Controller”结尾：  
+
+    @Path("myforum")
+    public class ForumController {
+    }
+
+注意标注在类(class)上的注解“@Path("myforum")”，这意味着，这个类中定义的所有API的URI，都必须以“myforum”开头，比如“/myforum/xxx”和“/myforum/yyy”等（但“myforum”不一定是整个URI的第一级，比如“/aaa/myforum/bbb”）。  
+//TODO 通过一个配置文件来规定URI结构  
+//TODO 通过子文件夹的名字规划URI  
+
+
+接着，实现第一个API——“GET http://github.com/myforum/topic”：
+    @Path("myforum")
+    public class ForumController {
+    
+        @Get("topic")
+        public String getTopics() {
+            //显示主帖列表
+            return "topiclist";
+        }
+    }
+因为是“GET”方法，所以在该方法上标注“@Get("")”，URI“/myforum/topic”中的“myforum”已经在“@Path("myforum")”中定义过了，所以只剩下“topic”，于是写“@Get("topic")”。  
+
+再看第二个API——“GET http://github.com/myforum/topic/123”，以前一个的唯一区别是，后面多了个“/123”，表示主帖id，而这个id当然不是固定的，只有用户点击链接发来请求时才能知道，肿么办？  
+没关系，rose支持正则表达式！可以这么写：
+
+    @Get("topic/{topicId:[0-9]+}")
+    public String showTopic(@Param("topicId") int topicId) {
+        //显示单个主帖和它的跟贴
+        return "topic";
+    }
+
+与前一个API相比，多了段“/{topicId:[0-9]+}”。正则表达式被大括号"{}"包围，格式为“{ paramName : regularExpression }”，只有请求的URI能被正则表达式匹配时，才会执行这个方法，而被匹配的值将被保存在名为“topicId”的参数中。  
+
+同理，实现第三个API，稍微复杂一点：
+    @Get("topic/{topicId:[0-9]+}/comment/{commentId:[0-9]+}")
+    public String showComment(@Param("topicId") int topicId, @Param("commentId") int commentId) {
+        //显示单个跟贴
+        return "comment";
+    }
+
+最后两个API使用POST方法，其他与前面相同：
+
+    @Post("topic")
+    public String createTopic(){
+        //创建一个主帖
+        return "topic";
+    }
+    @Post("topic/{topicId:[0-9]+}/comment")
+    public String createComment(@Param("topicId") int topicId){
+        //创建一个跟贴
+        return "comment";
+    }
+
+完整的代码如下（省略了import语句）：  
+
+    @Path("myforum")
+    public class ForumController {
+    
+        @Get("topic")
+        public String getTopics() {
+            //显示主帖列表
+            return "topiclist";
+        }
+    
+        @Get("topic/{topicId:[0-9]+}")
+        public String showTopic(@Param("topicId") int topicId) {
+            //显示单个主帖和它的跟贴
+            return "topic";
+        }
+    
+        @Get("topic/{topicId:[0-9]+}/comment/{commentId:[0-9]+}")
+        public String showComment(@Param("topicId") int topicId, @Param("commentId") int commentId) {
+            //显示单个跟贴
+            return "comment";
+        }
+
+        @Post("topic")
+        public String createTopic(){
+            //创建一个主帖
+            return "topic";
+        }
+
+        @Post("topic/{topicId:[0-9]+}/comment")
+        public String createComment(@Param("topicId") int topicId){
+            //创建一个跟贴
+            return "comment";
+        }
+    }
+
+至此，一个贴吧功能的Controller就编写完成了。
+###2) 原理
 Rose 是一个基于Servlet规范、Spring“规范”的WEB开发框架。  
 
 Rose 框架通过在web.xml配置过滤器拦截并处理匹配的web请求，如果一个请求应该由在Rose框架下的类来处理， 该请求将在Rose调用中完成对客户端响应. 如果一个请求在Rose中没有找到合适的类来为他服务，Rose将把该请求移交给web容器的其他组件来处理。  
@@ -81,8 +197,8 @@ ROOT的下级有个GET结点，代表对该地址支持GET访问，不支持POST
 
 大部分情况下，匹配树的结构和实际的URI结构会一致，也因此匹配树的深度并不固定，每一个中间结点或叶子节点都有可能代表一个最终的URI地址，可以处理GET、POST等请求。对于那些匹配树存在的地址，但没有GET、POST、DELETE等子结点的，一旦用户请求了该地址，rose将直接把该请求转交给web容器处理，如果容器也不能处理它，最终用户将得到404响应。  
 
-匹配过程: Rose以请求的地址作为处理输入(不包含Query串，即问号后的字符串)。如果匹配树中存在对应的地址，且含有对应请求方法(GET、POST、PUT、DELETE)的，则表示匹配成功；如果含有其他方法的，但没有当前方法的（比如只支持GET，但当前是POST的），则也表示匹配成功，但最后会以405响应出去；如果所给的地址没有任何支持的方法或者没有找到匹配地址的，则表示匹配失败。1.0.1不支持回朔算法，1.0.2将支持部分回朔算法(待发布时再做详细介绍)。  
+**匹配过程**: Rose以请求的地址作为处理输入(不包含Query串，即问号后的字符串)。如果匹配树中存在对应的地址，且含有对应请求方法(GET、POST、PUT、DELETE)的，则表示匹配成功；如果含有其他方法的，但没有当前方法的（比如只支持GET，但当前是POST的），则也表示匹配成功，但最后会以405响应出去；如果所给的地址没有任何支持的方法或者没有找到匹配地址的，则表示匹配失败。1.0.1不支持回朔算法，1.0.2将支持部分回朔算法(待发布时再做详细介绍)。  
 
-参数解析: 在调用验证器、拦截器 控制器之前，Rose完成2个解析：解析匹配树上动态的参数出实际值，解析控制器方法中参数实际的值。参数可能会解析失败(例如转化异常等等 )，此时该参数以默认值进行代替，同时Rose解析失败和异常记录起来放到专门的类中，继续下一个过程而不打断执行。  
+**参数解析**: 在调用验证器、拦截器 控制器之前，Rose完成2个解析：解析匹配树上动态的参数出实际值，解析控制器方法中参数实际的值。参数可能会解析失败(例如转化异常等等 )，此时该参数以默认值进行代替，同时Rose解析失败和异常记录起来放到专门的类中，继续下一个过程而不打断执行。  
 
 
