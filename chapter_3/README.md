@@ -135,8 +135,8 @@ rose手册第三章：框架功能参考
 
 比如前面例子中的Controller，在API不变的前提下，还可以这么做：
 
- * 1.在controllers路径下新建一个叫做“myforum”的文件夹。
- * 2.将ForumController从“xxx.controllers”移动到“xxx.controllers.myforum”  
+1.在controllers路径下新建一个叫做“myforum”的文件夹。
+2.将ForumController从“xxx.controllers”移动到“xxx.controllers.myforum”  
 并改成下面这样：  
 
     @Path("")
@@ -234,9 +234,9 @@ comment.jsp的代码如下：
 ####2) 还有几种规则？
 rose中，controller方法的返回值有下面几种规则：
 
-* 1.返回普通字符串，如上所述，最常用的做法，渲染视图文件并返回。
-* 2.以“@”开头的字符串，比如“return "@HelloWorld";”，会将“@”后面的字符串“HelloWorld”作为结果返回；
-* 3.以“@json:”开头的字符串
+1.返回普通字符串，如上所述，最常用的做法，渲染视图文件并返回。
+2.以“@”开头的字符串，比如“return "@HelloWorld";”，会将“@”后面的字符串“HelloWorld”作为结果返回；
+3.以“@json:”开头的字符串
 比如:  
 
     @Get("json")
@@ -247,8 +247,8 @@ rose中，controller方法的返回值有下面几种规则：
 
 将会返回一个字符串（jo.toString()），并自动将“HttpServletResponse”中的“contentType”设置为“application/json”。
 
-* 4.【不推荐使用】以“r:”开头的字符串，比如“return "r:/aaa";”，等效于调用“javax.servlet.http.HttpServletResponse.sendRedirect("/aaa")”，将执行301跳转。
-* 5.【不推荐使用】以“a:”开头的字符串，比如“return "a:/bbb";”，将会携带参数再次匹配roseTree，找到controller中某个方法并执行，相当于“javax.servlet.RequestDispatcher.forward(request, response)”。
+4.【不推荐使用】以“r:”开头的字符串，比如“return "r:/aaa";”，等效于调用“javax.servlet.http.HttpServletResponse.sendRedirect("/aaa")”，将执行301跳转。
+5.【不推荐使用】以“a:”开头的字符串，比如“return "a:/bbb";”，将会携带参数再次匹配roseTree，找到controller中某个方法并执行，相当于“javax.servlet.RequestDispatcher.forward(request, response)”。
 
 ###3.1.3) 原理
 
