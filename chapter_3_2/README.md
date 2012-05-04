@@ -62,3 +62,5 @@ public class AccessTrackInterceptor extends ControllerInterceptorAdapter {
 * 全站是否登录判断相关的逻辑，写在一个拦截器里，一次完成后，其他地方不再关心这个代码，在需要登录才能做的controller上注解一下，表示需要被执行拦截。
 * 日志收集的逻辑，在一个拦截器里进行当前的access log记录。
 * 权限体系的逻辑，写在一个拦截器里，在对应的操作上作注解，拦截器中进行细节的判断，新加的api也只是需要一次注解就得到了权限的判断。
+
+[文中所提代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example]
