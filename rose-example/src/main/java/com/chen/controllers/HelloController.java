@@ -14,5 +14,10 @@ public class HelloController {
     public String index() {
         return "@hello world";
     }
+
+    @Get("")
+    public String index2() throws Exception {
+        return "@hello world";
+    }
 }
 
