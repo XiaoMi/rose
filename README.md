@@ -10,8 +10,8 @@ rose手册计划
 * rose手册第三章：框架功能参考
 	* 3.1  controller层：url对照规则与返回结果规则 (chapter_3_1)
 	* 3.2  controller层：拦截器支持 (chapter_3_2)
-	* 3.3  controller层：ErrHandle支持 (chapter_3_3)
-	* 3.4  controller层：自定义http参数支持
+	* 3.3  controller层：ErrHandler支持 (chapter_3_3)
+	* 3.4  controller层：自定义http参数支持 (chapter_3_4)
 	* 3.5  controller层：一闪而过的信息，flash支持
 	* 3.6  controller层：门户必备portal支持
 	* 3.7  controller层：门户必备pipe支持
