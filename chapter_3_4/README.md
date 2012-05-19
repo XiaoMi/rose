@@ -60,6 +60,7 @@ public class ChenBeanResolver implements ParamResolver {
 ** hello world:1:2
 
 3.4.2 rose内置的参数支持
+------------------------
 
 除了上述的自定义resolver外，rose还内置了丰富的resolver，都是大家的经验总结，使用起来会非常方便，它们是：
 * 所有的基础java类型，都可以直接使用，rose进行自动转换，比如在action中的类型为long id，则id可以转为数字，不再需要从string转为long。
