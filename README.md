@@ -12,14 +12,15 @@ rose手册计划
 	* 3.2  controller层：拦截器支持 (chapter_3_2)
 	* 3.3  controller层：ErrHandler支持 (chapter_3_3)
 	* 3.4  controller层：自定义http参数支持 (chapter_3_4)
-	* 3.5  controller层：一闪而过的信息，flash支持
-	* 3.6  controller层：门户必备portal支持
-	* 3.7  controller层：门户必备pipe支持
-	* 3.8  controller层：上传文件
-	* 3.9  DAO层：DAO的基本匹配规则
-	* 4.0  DAO层：DAO的数据源选择 
-	* 4.1  DAO层：分库分表设置
-	* 4.2  DAO层：DAO的发展计划
+	* 3.5  controller层：统一的参数验证办法 (chapter_3_5)
+	* 3.6  controller层：一闪而过的信息，flash支持
+	* 3.7  controller层：门户必备portal支持
+	* 3.8  controller层：门户必备pipe支持
+	* 3.9  controller层：上传文件
+	* 4.0  DAO层：DAO的基本匹配规则
+	* 4.1  DAO层：DAO的数据源选择 
+	* 4.2  DAO层：分库分表设置
+	* 4.3  DAO层：DAO的发展计划
 
 * rose手册第四章：安全
 * rose手册第五章：FAQ 常见问题
