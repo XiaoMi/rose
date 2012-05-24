@@ -56,5 +56,9 @@ public class NotBlankParamValidator implements ParamValidator {
     }
 ~~~~~
 
+解读：
+* 当遇到NotBlank注解的参数时，会自动执行参数判断
+* 如果messages为空，则会得到“参数不能为空”的返回
+
 文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。
                                                                                       
