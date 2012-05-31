@@ -3,6 +3,11 @@ rose手册计划
 * 目标：光大rose在国内java行业的使用，降低java入门。
 * 人人网、糯米网释出的、开源的高效Java web开发框架。在小米米聊服务端再次被验证和使用。一个从零开始的创业公司，在大家技术背景不一的情况下，rose很简单快速地传达到了大家中间。本手册致力于让php开发人员也能快速使用上java开发高性能服务。
 
+* 如果在阅读过程中有任何疑问，欢迎来信咨询：czhttp@gmail.com (或者在 http://www.54chen.com 留言)，将会第一时间得到答复。
+
+* 小米科技 bmw 团队荣誉出品。（BasicMiliaoWare）
+ 
+
 章节计划
 ========
 * rose手册第一章：入门指引 (chapter_1 or http://www.54chen.com/life/rose-manual-1.html)
