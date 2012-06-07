@@ -18,9 +18,9 @@ rose手册计划
 	* 3.3  controller层：ErrHandler支持 (chapter_3_3)
 	* 3.4  controller层：自定义http参数支持 (chapter_3_4)
 	* 3.5  controller层：统一的参数验证办法 (chapter_3_5)
-	* 3.6  controller层：一闪而过的信息，flash支持
-	* 3.7  controller层：门户必备portal支持
-	* 3.8  controller层：门户必备pipe支持
+	* 3.6  controller层：一闪而过的信息，flash支持 (chapter_3_6)
+	* 3.7  controller层：门户必备portal支持 (chapter_3_7)
+	* 3.8  controller层：门户必备pipe支持 (chapter_3_8)
 	* 3.9  controller层：上传文件
 	* 4.0  DAO层：DAO的基本匹配规则
 	* 4.1  DAO层：DAO的数据源选择 
@@ -30,6 +30,7 @@ rose手册计划
 * rose手册第四章：安全
 * rose手册第五章：FAQ 常见问题
  * 5.1 如何打一个可被rose识别的jar包
+ * 5.2 会被认成batch执行的sql返回
 * rose手册第六章：附录
 ## _EOF_
 ## _NL_
@@ -697,7 +698,7 @@ ROOT的下级有个GET结点，代表对该地址支持GET访问，不支持POST
 
 ## _EOF_
 ## _NL_
-controller层：拦截器支持
+3.2 controller层：拦截器支持
 ========================
 
 3.2.1 拦截器作用
@@ -765,7 +766,7 @@ public class AccessTrackInterceptor extends ControllerInterceptorAdapter {
 [文中所提代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example]
 ## _EOF_
 ## _NL_
-controller层：ErrorHandler支持
+3.3 controller层：ErrorHandler支持
 ===============================
 
 3.3.1 ErrorHandler的作用
@@ -857,7 +858,7 @@ public class ErrorHandler implements ControllerErrorHandler {
 文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。
 ## _EOF_
 ## _NL_
-controller层：自定义http参数支持
+3.4 controller层：自定义http参数支持
 ================================
 
 3.4.1 http参数支持的一些前言
@@ -940,7 +941,7 @@ public class ChenBeanResolver implements ParamResolver {
 文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。
 ## _EOF_
 ## _NL_
-controller层：统一的参数验证办法
+3.5 controller层：统一的参数验证办法
 =================================
 
 3.5.1 用来做什么
@@ -1006,7 +1007,7 @@ public class NotBlankParamValidator implements ParamValidator {
                                                                                       
 ## _EOF_
 ## _NL_
-controller层：一闪而过的信息，flash支持
+3.6 controller层：一闪而过的信息，flash支持
 =======================================
 
 3.6.1 需求描述
@@ -1053,3 +1054,78 @@ controller层：一闪而过的信息，flash支持
 * flash功能利用了浏览器的cookies功能，如果用户的环境不能使用cookies将不会有任何效果。
 
  文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。
+## _EOF_
+## _NL_
+3.7 controller层：门户必备portal支持
+====================================
+
+3.7.1 什么是portal?
+--------------------
+
+*字面意思，做门户用的。
+*简单来说，把一个网页分成了N个区域，每个区域由不同的action去执行，多线程并行提高cpu使用率。
+
+3.7.2 使用例子
+-----------
+
+*要使用portal，必须先在web.xml里声明所使用的线程池大小：
+
+~~~~~xml
+	<context-param>
+		<param-name>portalExecutorCorePoolSize</param-name>
+		<param-value>1024</param-value>
+	</context-param>
+~~~~~
+
+*然后看示例代码：
+
+~~~~~java
+    @Get("/3.7")
+    public String portal(Portal portal) {
+        portal.addWindow("p1", "/p1");
+        portal.addWindow("p2", "/p2");
+        return "portal";
+    }
+
+    @Get("/p1")
+    public String portal1() {
+        return "@this is p1";
+    }
+
+    @Get("/p2")
+    public String portal2() {
+        return "@this is p2";
+    }
+~~~~~
+
+*然后在第一个action中的portal.jsp中写到：
+
+~~~~~jsp
+<%@ page contentType="text/html;charset=UTF-8"%>
+portal演示信息：
+<br>
+${p1}
+<br>
+${p2}
+~~~~~
+
+*当我们部属好了之后，访问http://127.0.0.1/3.7
+*将从浏览器中得到：
+ *portal演示信息：
+ *this is p1
+ *this is p2
+
+3.7.3 这样子做的好处
+--------------------
+
+*更加充分地使用多核cpu。
+*更加方便多人协作时对项目进行模块划分，搞的时候，按照url一分，一个url一个模块，所有的页面都可以切成小的豆腐块，所以，你懂的。
+
+3.7.3 过去的经典事迹
+--------------------
+
+* 2010年的6月9日晚上7点"圣战"
+* http://www.54chen.com/architecture/rose-open-source-portal-framework.html
+
+ 文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供
+。

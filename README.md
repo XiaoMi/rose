@@ -18,9 +18,9 @@ rose手册计划
 	* 3.3  controller层：ErrHandler支持 (chapter_3_3)
 	* 3.4  controller层：自定义http参数支持 (chapter_3_4)
 	* 3.5  controller层：统一的参数验证办法 (chapter_3_5)
-	* 3.6  controller层：一闪而过的信息，flash支持
-	* 3.7  controller层：门户必备portal支持
-	* 3.8  controller层：门户必备pipe支持
+	* 3.6  controller层：一闪而过的信息，flash支持 (chapter_3_6)
+	* 3.7  controller层：门户必备portal支持 (chapter_3_7)
+	* 3.8  controller层：门户必备pipe支持 (chapter_3_8)
 	* 3.9  controller层：上传文件
 	* 4.0  DAO层：DAO的基本匹配规则
 	* 4.1  DAO层：DAO的数据源选择 
@@ -30,4 +30,5 @@ rose手册计划
 * rose手册第四章：安全
 * rose手册第五章：FAQ 常见问题
  * 5.1 如何打一个可被rose识别的jar包
+ * 5.2 会被认成batch执行的sql返回
 * rose手册第六章：附录

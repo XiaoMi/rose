@@ -10,6 +10,7 @@ import net.paoding.rose.web.Invocation;
 import net.paoding.rose.web.annotation.Param;
 import net.paoding.rose.web.annotation.Path;
 import net.paoding.rose.web.annotation.rest.Get;
+import net.paoding.rose.web.portal.Portal;
 import net.paoding.rose.web.var.Flash;
 
 @Path("")
@@ -18,6 +19,12 @@ public class HelloController {
     @Get("")
     public String index() {
         return "@hello world";
+    }
+
+    @PriCheckRequired
+    @Get("/3.2")
+    public String interceptorAction() {
+        return "@this is a access track interceptor";
     }
 
     @Get("/exception")
@@ -45,6 +52,23 @@ public class HelloController {
     public String flashStep2(Invocation inv, Flash flash) {
         inv.addModel("info", flash.get("msg"));
         return "flash";
+    }
+
+    @Get("/3.7")
+    public String portal(Portal portal) {
+        portal.addWindow("p1", "/p1");
+        portal.addWindow("p2", "/p2");
+        return "portal";
+    }
+
+    @Get("/p1")
+    public String portal1() {
+        return "@this is p1";
+    }
+
+    @Get("/p2")
+    public String portal2() {
+        return "@this is p2";
     }
 }
 
