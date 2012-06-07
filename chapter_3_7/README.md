@@ -24,17 +24,17 @@
 ~~~~~java
     @Get("/3.7")
     public String portal(Portal portal) {
-        portal.addWindow("p1", "/p1");
-        portal.addWindow("p2", "/p2");
+        portal.addWindow("p1", "/wp1");
+        portal.addWindow("p2", "/wp2");
         return "portal";
     }
 
-    @Get("/p1")
+    @Get("/wp1")
     public String portal1() {
         return "@this is p1";
     }
 
-    @Get("/p2")
+    @Get("/wp2")
     public String portal2() {
         return "@this is p2";
     }
