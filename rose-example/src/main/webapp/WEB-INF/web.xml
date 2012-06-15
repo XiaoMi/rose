@@ -26,7 +26,7 @@
 	
 	<context-param>
 		<param-name>portalExecutorCorePoolSize</param-name>
-		<param-value>1024</param-value>
+		<param-value>5</param-value>
 	</context-param>
 	
 	<filter>

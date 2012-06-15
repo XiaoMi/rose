@@ -12,9 +12,11 @@
 
 portal/pipe演示信息：
 <br>
-<div id="p1">${p1}</div>
+<div id="p1"></div>
 <br>
-<div id="p2">${p2}</div>
+<div id="p2"></div>
 
 </body>
-</html> 
+</html>
+<rosepipe:write>${p1}</rosepipe:write>
+<rosepipe:write>${p2}</rosepipe:write>
