@@ -10,9 +10,12 @@ import net.paoding.rose.web.Invocation;
 import net.paoding.rose.web.annotation.Param;
 import net.paoding.rose.web.annotation.Path;
 import net.paoding.rose.web.annotation.rest.Get;
+import net.paoding.rose.web.annotation.rest.Post;
 import net.paoding.rose.web.portal.Pipe;
 import net.paoding.rose.web.portal.Portal;
 import net.paoding.rose.web.var.Flash;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Path("")
 public class HelloController {
@@ -78,5 +81,16 @@ public class HelloController {
     public String portal2() {
         return "portal2";
     }
+
+    @Get("/3.9")
+    public String upload() {
+        return "upload";
+    }
+
+    @Post("/doUpload")
+    public String doUpload(@Param("file") MultipartFile file) {
+        return "@ upload ok!" + file.getOriginalFilename();
+    }
+
 }
 

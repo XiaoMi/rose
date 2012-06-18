@@ -21,11 +21,11 @@ rose手册计划
 	* 3.6  controller层：一闪而过的信息，flash支持 (chapter_3_6)
 	* 3.7  controller层：门户必备portal支持 (chapter_3_7)
 	* 3.8  controller层：门户必备pipe支持 (chapter_3_8)
-	* 3.9  controller层：上传文件
-	* 4.0  DAO层：DAO的基本匹配规则
-	* 4.1  DAO层：DAO的数据源选择 
-	* 4.2  DAO层：分库分表设置
-	* 4.3  DAO层：DAO的发展计划
+	* 3.9  controller层：上传文件 (chapter_3_9)
+	* 4.0  DAO层：DAO的基本匹配规则 (chapter_4_0)
+	* 4.1  DAO层：DAO的数据源选择 (chapter_4_1)
+	* 4.2  DAO层：分库分表设置 (chapter_4_2)
+	* 4.3  DAO层：DAO的发展计划 (chapter_4_3)
 
 * rose手册第四章：安全
 * rose手册第五章：FAQ 常见问题
