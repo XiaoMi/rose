@@ -42,25 +42,25 @@ rose手册第二章：配置与使用
 		<dependency>
 			<groupId>com.54chen</groupId>
 			<artifactId>paoding-rose-scanning</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.54chen</groupId>
 			<artifactId>paoding-rose</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.54chen</groupId>
 			<artifactId>paoding-rose-portal</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.54chen</groupId>
 			<artifactId>paoding-rose-jade</artifactId>
-			<version>1.1-SNAPSHOT</version>
+			<version>1.1</version>
 		</dependency>
 	</dependencies>
 ~~~~~
