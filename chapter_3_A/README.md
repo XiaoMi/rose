@@ -25,7 +25,7 @@ pom.xml
 		</dependency>
 ```
 
-* 除了需要jade的包外，还需要引入数据源连接池的jar，这里使用了dbcp，还是在pom.xml中：
+* 除了需要jade的包外，还需要引入数据源连接池的jar，这里使用了dbcp，当然了mysql-connector也是必不可少的，还是在pom.xml中添加：
 
 ```xml
 
@@ -33,6 +33,11 @@ pom.xml
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
                         <version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.10</version>
 		</dependency>
 
 ```
