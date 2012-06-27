@@ -5,6 +5,8 @@
 package com.chen.controllers;
 
 import com.chen.model.Chen;
+import com.chen.model.Test;
+import com.chen.service.TestService;
 
 import net.paoding.rose.web.Invocation;
 import net.paoding.rose.web.annotation.Param;
@@ -15,10 +17,14 @@ import net.paoding.rose.web.portal.Pipe;
 import net.paoding.rose.web.portal.Portal;
 import net.paoding.rose.web.var.Flash;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 @Path("")
 public class HelloController {
+
+    @Autowired
+    private TestService tService;
 
     @Get("")
     public String index() {
@@ -92,5 +98,11 @@ public class HelloController {
         return "@ upload ok!" + file.getOriginalFilename();
     }
 
+    @Get("/3.10")
+    public String getTest() {
+        Test t = tService.getTest();
+        String s = "Hello the No." + t.getId() + " is " + t.getMsg();
+        return "@" + s;
+    }
 }
 
