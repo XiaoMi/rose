@@ -30,3 +30,5 @@ public String upload(MultipartFile[] files) {
 ~~~~~
 
 * 同时也可以使用@Param传递不同的name。
+
+* 文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。
