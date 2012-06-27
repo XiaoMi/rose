@@ -31,10 +31,10 @@
 <li>3.7  controller层：门户必备portal支持 (chapter_3_7)</li>
 <li>3.8  controller层：门户必备pipe支持 (chapter_3_8)</li>
 <li>3.9  controller层：上传文件 (chapter_3_9)</li>
-<li>3.10  DAO层：DAO的基本配置与使用 (chapter_3_10)</li>
-<li>3.11  DAO层：DAO进阶：SQLParm支持和表达式SQL (chapter_3_11)</li>
-<li>3.12  DAO层：分表设置 (chapter_3_12)</li>
-<li>3.13  DAO层：DAO的发展计划 (chapter_3_13)</li>
+<li>3.A  DAO层：DAO的基本配置与使用 (chapter_3_A)</li>
+<li>3.B  DAO层：DAO进阶：SQLParm支持和表达式SQL (chapter_3_B)</li>
+<li>3.C  DAO层：分表设置 (chapter_3_C)</li>
+<li>3.D  DAO层：DAO的发展计划 (chapter_3_D)</li>
 </ul></li>
 <li><p>rose手册第四章：安全</p></li>
 <li>rose手册第五章：FAQ 常见问题
@@ -785,146 +785,6 @@ public String returnJson(){
 
 <h2><em>NL</em></h2>
 
-<h1>3.10  DAO层：DAO的基本配置与使用</h1>
-
-<p>本章开始进入对DB层的支持，同进也是日常开发用得最多的章节。</p>
-
-<h2>3.10.1 什么是jade？</h2>
-
-<ul>
-<li>jade大概是java access data layer的意思吧，具体的来由，在章节写到末尾的时候，我再找qieqie和liaohan大侠们写一写编年史。</li>
-<li>用jade的好处在于，尽可能减少重复的从db把数据对bean进行装配的过程，统一入口，隔离业务逻辑，方便review。</li>
-<li>jade是在spring完成的数据层的良好实践总结，无缝接入rose中，可以算得上是rose亲密无间的好模块。</li>
-</ul>
-
-<h2>3.10.2 引入基础配置</h2>
-
-<ul>
-<li>要开始使用jade，一定要先引用jade的基础包：</li>
-</ul>
-
-<p>pom.xml</p>
-
-<p><code>xml
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.54chen&lt;/groupId&gt;
-            &lt;artifactId&gt;paoding-rose-jade&lt;/artifactId&gt;
-            &lt;version&gt;1.1&lt;/version&gt;
-        &lt;/dependency&gt;
-</code></p>
-
-<ul>
-<li>除了需要jade的包外，还需要引入数据源连接池的jar，这里使用了dbcp，还是在pom.xml中：</li>
-</ul>
-
-<p>```xml</p>
-
-<pre><code>    &lt;dependency&gt;
-        &lt;groupId&gt;commons-dbcp&lt;/groupId&gt;
-        &lt;artifactId&gt;commons-dbcp&lt;/artifactId&gt;
-                    &lt;version&gt;1.2.2&lt;/version&gt;
-    &lt;/dependency&gt;
-</code></pre>
-
-<p>```</p>
-
-<ul>
-<li>在pom中引入了依赖之后，需要定义一个数据源，这里先不考虑多个数据源的情况。</li>
-</ul>
-
-<p>在war项目的applicationContext.xml中增加数据源定义：</p>
-
-<p>```xml</p>
-
-<pre><code> &lt;!-- 数据源配置 dbcp --&gt;
-&lt;bean id="jade.dataSource.com.chen.dao" class="org.apache.commons.dbcp.BasicDataSource"
-    destroy-method="close"&gt;
-    &lt;property name="driverClassName" value="com.mysql.jdbc.Driver"&gt;&lt;/property&gt;
-    &lt;property name="url"
-        value="jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;amp;characterEncoding=utf-8"&gt;&lt;/property&gt;
-    &lt;property name="username" value="test"&gt;&lt;/property&gt;
-    &lt;property name="password" value="test"&gt;&lt;/property&gt;
-    &lt;!-- 运行判断连接超时任务的时间间隔，单位为毫秒，默认为-1，即不执行任务。 --&gt;
-    &lt;property name="timeBetweenEvictionRunsMillis" value="3600000"&gt;&lt;/property&gt;
-    &lt;!-- 连接的超时时间，默认为半小时。 --&gt;
-    &lt;property name="minEvictableIdleTimeMillis" value="3600000"&gt;&lt;/property&gt;
-&lt;/bean&gt; 
-</code></pre>
-
-<p>```</p>
-
-<ul>
-<li>这里假设了mysql已经安装在本地了，用户名为test，密码为test。</li>
-<li>jade约定了bean的id为jade.dataSource.classPackageName。</li>
-<li>jade约定了这个bean的有效范围为classPackageName所有的DAO。</li>
-<li>jade约定了除非有专门的定义，所有的子目录也受bean上的classpackageName所影响。</li>
-</ul>
-
-<h2>3.10.3 第一个读取数据库的实例</h2>
-
-<ul>
-<li>先需要准备一下数据库：</li>
-</ul>
-
-<p>```sql</p>
-
-<p>create table test (int id, varchar(200) msg);
-insert into test values(111,'adfafafasdf');</p>
-
-<p>```</p>
-
-<ul>
-<li>然后准备简练的DAO声明：</li>
-</ul>
-
-<p>```java</p>
-
-<p>@DAO
-public interface TestDAO {
-    @SQL("select id,msg from test limit 1")
-    public Test getTest();
-}</p>
-
-<p>```</p>
-
-<ul>
-<li><p>Test是一个class，里面有标准的getter和setter。</p></li>
-<li><p>然后从一个类去调用它：</p></li>
-</ul>
-
-<p>```java</p>
-
-<p>@Service
-public class TestService {</p>
-
-<pre><code>@Autowired
-private TestDAO testDAO;
-
-public Test getTest() {
-    return testDAO.getTest();
-}
-</code></pre>
-
-<p>}</p>
-
-<p>```</p>
-
-<ul>
-<li>当然也可以直接用controller就调用它显示了，当然这不是一个大型项目良好的架构，架构问题在最后的章节里讲述。</li>
-</ul>
-
-<h2>3.10.4 查看演示代码</h2>
-
-<ul>
-<li>rose-example项目的HelloController已经准备好了一个action做为此节的总结。</li>
-<li><p>你可以将此节发布到resin或者tomcat后访问：http://127.0.0.1/3.10 查看结果。</p></li>
-<li><p>文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。</p>
-
-<h2><em>EOF</em></h2></li>
-</ul>
-
-<h2><em>NL</em></h2>
-
 <h1>3.2 controller层：拦截器支持</h1>
 
 <h2>3.2.1 拦截器作用</h2>
@@ -1570,7 +1430,148 @@ public String upload(MultipartFile[] files) {
 ~~~~~</p>
 
 <ul>
-<li>同时也可以使用@Param传递不同的name。</li>
+<li><p>同时也可以使用@Param传递不同的name。</p></li>
+<li><p>文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。</p>
+
+<h2><em>EOF</em></h2></li>
+</ul>
+
+<h2><em>NL</em></h2>
+
+<h1>3.A  DAO层：DAO的基本配置与使用</h1>
+
+<p>本章开始进入对DB层的支持，同进也是日常开发用得最多的章节。</p>
+
+<h2>3.A.1 什么是jade？</h2>
+
+<ul>
+<li>jade大概是java access data layer的意思吧，具体的来由，在章节写到末尾的时候，我再找qieqie和liaohan大侠们写一写编年史。</li>
+<li>用jade的好处在于，尽可能减少重复的从db把数据对bean进行装配的过程，统一入口，隔离业务逻辑，方便review。</li>
+<li>jade是在spring完成的数据层的良好实践总结，无缝接入rose中，可以算得上是rose亲密无间的好模块。</li>
+</ul>
+
+<h2>3.A.2 引入基础配置</h2>
+
+<ul>
+<li>要开始使用jade，一定要先引用jade的基础包：</li>
+</ul>
+
+<p>pom.xml</p>
+
+<p><code>xml
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.54chen&lt;/groupId&gt;
+            &lt;artifactId&gt;paoding-rose-jade&lt;/artifactId&gt;
+            &lt;version&gt;1.1&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></p>
+
+<ul>
+<li>除了需要jade的包外，还需要引入数据源连接池的jar，这里使用了dbcp，还是在pom.xml中：</li>
+</ul>
+
+<p>```xml</p>
+
+<pre><code>    &lt;dependency&gt;
+        &lt;groupId&gt;commons-dbcp&lt;/groupId&gt;
+        &lt;artifactId&gt;commons-dbcp&lt;/artifactId&gt;
+                    &lt;version&gt;1.2.2&lt;/version&gt;
+    &lt;/dependency&gt;
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li>在pom中引入了依赖之后，需要定义一个数据源，这里先不考虑多个数据源的情况。</li>
+</ul>
+
+<p>在war项目的applicationContext.xml中增加数据源定义：</p>
+
+<p>```xml</p>
+
+<pre><code> &lt;!-- 数据源配置 dbcp --&gt;
+&lt;bean id="jade.dataSource.com.chen.dao" class="org.apache.commons.dbcp.BasicDataSource"
+    destroy-method="close"&gt;
+    &lt;property name="driverClassName" value="com.mysql.jdbc.Driver"&gt;&lt;/property&gt;
+    &lt;property name="url"
+        value="jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;amp;characterEncoding=utf-8"&gt;&lt;/property&gt;
+    &lt;property name="username" value="test"&gt;&lt;/property&gt;
+    &lt;property name="password" value="test"&gt;&lt;/property&gt;
+    &lt;!-- 运行判断连接超时任务的时间间隔，单位为毫秒，默认为-1，即不执行任务。 --&gt;
+    &lt;property name="timeBetweenEvictionRunsMillis" value="3600000"&gt;&lt;/property&gt;
+    &lt;!-- 连接的超时时间，默认为半小时。 --&gt;
+    &lt;property name="minEvictableIdleTimeMillis" value="3600000"&gt;&lt;/property&gt;
+&lt;/bean&gt; 
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li>这里假设了mysql已经安装在本地了，用户名为test，密码为test。</li>
+<li>jade约定了bean的id为jade.dataSource.classPackageName。</li>
+<li>jade约定了这个bean的有效范围为classPackageName所有的DAO。</li>
+<li>jade约定了除非有专门的定义，所有的子目录也受bean上的classpackageName所影响。</li>
+</ul>
+
+<h2>3.A.3 第一个读取数据库的实例</h2>
+
+<ul>
+<li>先需要准备一下数据库：</li>
+</ul>
+
+<p>```sql</p>
+
+<p>create table test (int id, varchar(200) msg);
+insert into test values(111,'adfafafasdf');</p>
+
+<p>```</p>
+
+<ul>
+<li>然后准备简练的DAO声明：</li>
+</ul>
+
+<p>```java</p>
+
+<p>@DAO
+public interface TestDAO {
+    @SQL("select id,msg from test limit 1")
+    public Test getTest();
+}</p>
+
+<p>```</p>
+
+<ul>
+<li><p>Test是一个class，里面有标准的getter和setter。</p></li>
+<li><p>然后从一个类去调用它：</p></li>
+</ul>
+
+<p>```java</p>
+
+<p>@Service
+public class TestService {</p>
+
+<pre><code>@Autowired
+private TestDAO testDAO;
+
+public Test getTest() {
+    return testDAO.getTest();
+}
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<ul>
+<li>当然也可以直接用controller就调用它显示了，当然这不是一个大型项目良好的架构，架构问题在最后的章节里讲述。</li>
+</ul>
+
+<h2>3.A.4 查看演示代码</h2>
+
+<ul>
+<li>rose-example项目的HelloController已经准备好了一个action做为此节的总结。</li>
+<li><p>你可以将此节发布到resin或者tomcat后访问：http://127.0.0.1/3.10 查看结果。</p></li>
+<li><p>文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。</p></li>
 </ul>
   </body>
 </html>

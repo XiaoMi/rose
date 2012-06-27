@@ -22,10 +22,10 @@ rose手册计划
 	* 3.7  controller层：门户必备portal支持 (chapter_3_7)
 	* 3.8  controller层：门户必备pipe支持 (chapter_3_8)
 	* 3.9  controller层：上传文件 (chapter_3_9)
-	* 3.10  DAO层：DAO的基本配置与使用 (chapter_3_10)
-	* 3.11  DAO层：DAO进阶：SQLParm支持和表达式SQL (chapter_3_11)
-	* 3.12  DAO层：分表设置 (chapter_3_12)
-	* 3.13  DAO层：DAO的发展计划 (chapter_3_13)
+	* 3.A  DAO层：DAO的基本配置与使用 (chapter_3_A)
+	* 3.B  DAO层：DAO进阶：SQLParm支持和表达式SQL (chapter_3_B)
+	* 3.C  DAO层：分表设置 (chapter_3_C)
+	* 3.D  DAO层：DAO的发展计划 (chapter_3_D)
 
 * rose手册第四章：安全
 * rose手册第五章：FAQ 常见问题
