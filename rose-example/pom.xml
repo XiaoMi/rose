@@ -111,6 +111,39 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.26</version>
+				<configuration>
+					<connector implementation="org.mortbay.jetty.bio.SocketConnector">
+					</connector>
+					<scanIntervalSeconds>10</scanIntervalSeconds> 
+					<stopKey>foo</stopKey>
+					<stopPort>9999</stopPort>
+				</configuration>
+				<executions>
+					<execution>
+						<id>start-jetty</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<scanIntervalSeconds>0</scanIntervalSeconds>
+							<daemon>true</daemon>
+						</configuration>
+					</execution>
+					<execution>
+						<id>stop-jetty</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>
