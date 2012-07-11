@@ -10,6 +10,7 @@ import net.paoding.rose.jade.annotation.DAO;
 import net.paoding.rose.jade.annotation.ReturnGeneratedKeys;
 import net.paoding.rose.jade.annotation.SQL;
 import net.paoding.rose.jade.annotation.SQLParam;
+import net.paoding.rose.jade.annotation.ShardBy;
 
 import java.util.List;
 
@@ -31,4 +32,7 @@ public interface TestDAO {
 
     @SQL("SELECT user_id, device_token FROM test_##(:partition) where user_id in(:ids)")
     public List<Test> getTestsByIds(@SQLParam("partition") int partition, @SQLParam("ids") List<Integer> ids);
+
+    @SQL("SELECT user_id, device_token FROM test where user_id =:id")
+    public List<Test> getTestsById(@ShardBy @SQLParam("id") int id);
 }

@@ -25,4 +25,17 @@
 		<!-- 连接的超时时间，默认为半小时。 -->
 		<property name="minEvictableIdleTimeMillis" value="3600000"></property>
 	</bean> 
+	
+	 <!-- 以下配置为分表设置 -->
+     <bean id="jade.routerInterpreter" class="com.xiaomi.common.service.dal.routing.RewriteSQLInterpreter">
+             <property name="routingConfigurator" ref="jade.routingConfigurator" />
+     </bean>
+     <bean id="jade.routingConfigurator" class="com.xiaomi.common.service.dal.routing.RoutingConfigurator">
+             <property name="partitions">
+                   <list> 
+                        <value>hash:test:id:test_{0}:100</value> 
+                   </list>
+             </property>
+     </bean>
+	
 </beans>
