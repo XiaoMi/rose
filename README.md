@@ -25,7 +25,6 @@ rose手册计划
 	* 3.A  DAO层：DAO的基本配置与使用 (chapter_3_A)
 	* 3.B  DAO层：DAO进阶：SQLParm支持和表达式SQL (chapter_3_B)
 	* 3.C  DAO层：分表设置 (chapter_3_C)
-	* 3.D  DAO层：DAO的发展计划 (chapter_3_D)
 
 * rose手册第四章：安全
 * rose手册第五章：FAQ 常见问题
