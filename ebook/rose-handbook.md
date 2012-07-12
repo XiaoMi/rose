@@ -25,7 +25,6 @@ rose手册计划
 	* 3.A  DAO层：DAO的基本配置与使用 (chapter_3_A)
 	* 3.B  DAO层：DAO进阶：SQLParm支持和表达式SQL (chapter_3_B)
 	* 3.C  DAO层：分表设置 (chapter_3_C)
-	* 3.D  DAO层：DAO的发展计划 (chapter_3_D)
 
 * rose手册第四章：安全
 * rose手册第五章：FAQ 常见问题
@@ -33,8 +32,8 @@ rose手册计划
  * 5.2 会被认成batch执行的sql返回
  * 5.3 一个良好的大型WEB项目架构实践
 * rose手册第六章：附录
-## _EOF_
-## _NL_
+
+
 rose手册第一章：入门指引
 ========================
 
@@ -107,8 +106,8 @@ public class TestController {
 
 下一节预告：rose手册第二章：配置与使用
 =======================================
-## _EOF_
-## _NL_
+
+
 rose手册第二章：配置与使用
 ==========================
 
@@ -360,8 +359,8 @@ __EOF__
 * 动态更新版本地址在：https://github.com/XiaoMi/rose/tree/master/chapter_2
 * 文中所提及的代码在：https://github.com/XiaoMi/rose/rose-example
 
-## _EOF_
-## _NL_
+
+
 rose手册第三章：框架功能参考
 ===========================
 
@@ -697,8 +696,8 @@ ROOT的下级有个GET结点，代表对该地址支持GET访问，不支持POST
 **参数解析**: 在调用验证器、拦截器 控制器之前，Rose完成2个解析：解析匹配树上动态的参数出实际值，解析控制器方法中参数实际的值。参数可能会解析失败(例如转化异常等等 )，此时该参数以默认值进行代替，同时Rose解析失败和异常记录起来放到专门的类中，继续下一个过程而不打断执行。  
 
 
-## _EOF_
-## _NL_
+
+
 3.2 controller层：拦截器支持
 ========================
 
@@ -765,8 +764,8 @@ public class AccessTrackInterceptor extends ControllerInterceptorAdapter {
 * 权限体系的逻辑，写在一个拦截器里，在对应的操作上作注解，拦截器中进行细节的判断，新加的api也只是需要一次注解就得到了权限的判断。
 
 [文中所提代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example]
-## _EOF_
-## _NL_
+
+
 3.3 controller层：ErrorHandler支持
 ===============================
 
@@ -857,8 +856,8 @@ public class ErrorHandler implements ControllerErrorHandler {
 ~~~~~
 
 文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。
-## _EOF_
-## _NL_
+
+
 3.4 controller层：自定义http参数支持
 ================================
 
@@ -940,8 +939,8 @@ public class ChenBeanResolver implements ParamResolver {
   * 代码中User是一个自定义的bean，有属性id,name,level等。
 
 文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。
-## _EOF_
-## _NL_
+
+
 3.5 controller层：统一的参数验证办法
 =================================
 
@@ -1006,8 +1005,8 @@ public class NotBlankParamValidator implements ParamValidator {
 
 文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。
                                                                                       
-## _EOF_
-## _NL_
+
+
 3.6 controller层：一闪而过的信息，flash支持
 =======================================
 
@@ -1055,8 +1054,8 @@ public class NotBlankParamValidator implements ParamValidator {
 * flash功能利用了浏览器的cookies功能，如果用户的环境不能使用cookies将不会有任何效果。
 
  文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。
-## _EOF_
-## _NL_
+
+
 3.7 controller层：门户必备portal支持
 ====================================
 
@@ -1130,8 +1129,8 @@ ${p2}
 
  文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供
 。
-## _EOF_
-## _NL_
+
+
 3.8 controller层：门户必备pipe支持
 ====================================
 
@@ -1207,8 +1206,8 @@ portal/pipe演示信息：
 * 久经考验
 
  文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。
-## _EOF_
-## _NL_
+
+
 3.9  controller层：上传文件
 ===========================
 
@@ -1243,8 +1242,8 @@ public String upload(MultipartFile[] files) {
 * 同时也可以使用@Param传递不同的name。
 
 * 文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。
-## _EOF_
-## _NL_
+
+
 3.A  DAO层：DAO的基本配置与使用
 ==================================
 
@@ -1272,7 +1271,7 @@ pom.xml
 		</dependency>
 ```
 
-* 除了需要jade的包外，还需要引入数据源连接池的jar，这里使用了dbcp，还是在pom.xml中：
+* 除了需要jade的包外，还需要引入数据源连接池的jar，这里使用了dbcp，当然了mysql-connector也是必不可少的，还是在pom.xml中添加：
 
 ```xml
 
@@ -1280,6 +1279,11 @@ pom.xml
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
                         <version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.10</version>
 		</dependency>
 
 ```
@@ -1365,3 +1369,218 @@ public class TestService {
 
 
 * 文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。
+
+
+3.B DAO层：DAO进阶：SQLParm支持和表达式SQL
+==========================================
+
+3.B.1 SQLParam介绍：DAO方法传递参数
+-----------------------------------
+
+* SQLParam作为DAO支持中的参数传递使者，可以传递一个常见的变量，也可以是一个自定义的对象。
+* 比如：
+
+```java
+    @SQL("insert into test (id,msg) values (:t.id,:t.msg)")
+    public void insertTest(@SQLParam("t") Test test);
+```
+* 上列中Test对象通过t传递到sql执行中去，并且可以分别使用其中的属性。这感觉是不是很自然？
+
+* 当然，如果是一个int、long、String等自在不言中。
+
+* 当是list时，会有自动的batch操作，将sql拆为多条sql执行。这个小技巧会在后面的章节里讲。平时很少用到。
+
+3.B.2 ReturnGeneratedKeys介绍：返回刚刚插入的ID号
+--------------------------------------------------
+
+* 特别是使用mysql开发的广大劳苦大众，常常会使用到auto_increament的字段。
+* 当一条insert语句在执行的时候，我们常常会去需要拿它的当前的自增id是多少。
+
+```java
+
+    @ReturnGeneratedKeys
+    @SQL("insert into test (id,msg) values (:t.id,:t.msg)")
+    public int insertTest(@SQLParam("t") Test test);
+
+```
+
+* 如上述代码所示，只需要加上一个@ReturnGeneratedKeys即可返回当前的id
+
+3.B.2 表达式的支持
+------------------
+
+* 多变的业务需求决定了我们的sql是复杂的，需要有条件地执行。
+* 如果每种条件都去写DAO中的SQL，那DAO的变得很大。
+* 常常会有动态产生sql的需求。
+* jade支持一些常规的表达式。
+
+* 语法一：常见的变量赋值
+ * 冒号（:）表示这是一个变量，比如上面的例子里的 :t.id，它会被一个值替换。
+
+* 语法二：字符串连接
+ * 连续的井号（##） 表示后面的变量作字符串连接
+ * 如下例中的partition变量，还请不要误解，分表不是这样做的，下一章会介绍标准的分表设置。
+
+```java
+
+    @SQL("SELECT user_id, device_token FROM test_##(:partition) LIMIT :limit")
+    public List<Test> getTests(@SQLParam("partition") int partition, @SQLParam("limit") int limit);
+
+```
+
+* 语法三：条件选择
+ * 井号if（#if{}）用于表示当条件满足时sql拼接。
+
+```java
+
+    @SQL("SELECT user_id, device_token FROM test_##(:partition) #if(:user>0){ where user_id=:user } LIMIT :limit")
+    public List<Test> getTestsIf(@SQLParam("partition") int partition, @SQLParam("limit") int limit, @SQLParam("user") int user); 
+
+```
+
+* 其他语法：还有for循环，实际使用少。
+* 典型地，一般的select in查询，可以直接传入list<int>，例如下例中的ids变量：
+
+```java
+
+    @SQL("SELECT user_id, device_token FROM test_##(:partition) where user_id in(:ids)")
+    public List<Test> getTestsByIds(@SQLParam("partition") int partition, @SQLParam("ids") List<Integer> ids);
+
+```
+
+* 文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。
+
+
+3.C  DAO层：分表设置
+====================
+
+ 欢迎顺利进入本章，如果您的企业需要这一节的内容，那么说明用户量很有前途，如果使用了本节的内容，不防向czhttp@gmail.com发信一封以表谢意，我们会很高兴收到各种反馈。 
+
+3.C.1 mysql分表的常规做法
+-------------------------
+
+ 以下是个人从业经验中的分表规则：
+
+* 按照 id % 100 分为一百份
+* 按照 id % 16 分为十六份
+* 按照 id/10 % 10 分为十份
+* 按照 id%10 分为十份
+
+ 以上分表规则特别在mysql中使用机会比较多，各有优势，没有对错，只有最好与最不好用。
+
+3.C.2 使用分表第一步：添加新的依赖
+----------------------------------
+
+ 要使用分表，需要添加新的依赖，由bmw提供的bmwutils。
+
+```xml
+
+<dependency>
+    <groupId>com.54chen</groupId>
+    <artifactId>bmwutils</artifactId>
+    <version>0.0.2</version>
+</dependency>
+
+``` 
+
+3.C.3 使用分表第二步：设置applicationContext.xml分表规则
+--------------------------------------------------------
+
+ 在开写代码之前，需要告诉DAO是哪个表需要分表，按照什么规则分，分多少份。
+
+```xml
+
+     <!-- 以下配置为分表设置 -->
+     <bean id="jade.routerInterpreter" class="com.xiaomi.common.service.dal.routing.RewriteSQLInterpreter">
+             <property name="routingConfigurator" ref="jade.routingConfigurator" />
+     </bean>
+     <bean id="jade.routingConfigurator" class="com.xiaomi.common.service.dal.routing.RoutingConfigurator">
+             <property name="partitions">
+                   <list> 
+                        <value>hash:test:id:test_{0}:100</value> 
+                   </list>
+             </property>
+     </bean>
+
+```
+
+* 此处配置中，partitions参数为一个list，可以对多个table进行定义。
+ * hash:test:id:test_{0}:100  表示：使用hash这种办法，将test这个表，按照id的值，分成100份，每份的表名为test_x
+
+
+3.C.4 使用分表第三步：bmwutils支持的分表办法
+--------------------------------------------
+
+* (hash)上例中的hash: 最常用的 id % 100 就是这种办法。该办法会把传入的值先进行转为数字后与定义的份数进行取模（%）。
+* (direct)最直接的一种：用的少一些，没有什么规则，直接根据第四个正则，与第三位传入的值进行替换。假设有个人名表，按照字母分表可以用。name_A,name_B,name_C...
+* (round)轮循：根据设置，按照调用sql的情况，轮流使用各个表。
+* (range)范围：一般用来做日期范围的分表，比如说微博类的，可变值为一个时间，当时间传入时，第三位支持log_{yyyy} log_{yyyy_MM}等时间格式的替换，可轻松做到按周、月、年分表。
+* (xm-hash)小米hash：一种古怪的办法，按照传入值的十位进行取模的分表方案。
+* (xm-str-hash)小米字符串hash：将字符串按照固定算法变成long之后，再按照小米hash逻辑处理。
+* (hex-hash)16进制分表：固定256份以内，传入的值按照16进制转换后按hash求模。
+
+3.C.5 使用分表第四步：写DAO代码@ShardBy
+---------------------------------------
+
+```java
+
+    @SQL("SELECT user_id, device_token FROM test where user_id =:id")
+    public List<Test> getTestsById(@ShardBy @SQLParam("id") int id);
+
+```
+
+ 与不分表的dao相比，只多了一个shardBy，标识按照这个参数值分表。
+
+* 文中所提及代码均在 https://github.com/XiaoMi/rose/tree/master/rose-example 提供。
+
+
+
+rose手册第四章: 安全
+====================
+
+* 在controller中，如果你不想将一个方法公开对外，那就不要将其标识为public，因为public的方法会被rose认为是一个要公开的action。
+
+
+
+rose手册第五章：FAQ 常见问题
+============================
+
+5.1 如何打一个可被rose识别的jar包
+----------------------------------
+
+ 如果你使用maven，在pom中添加如果定义之后，你打出来的jar包就会被rose扫描到并且引入到上下文环境中：
+
+```xml
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Rose>*</Rose>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+```
+
+* 用途：
+ * 比如说你做了一个拦截器，在多个项目里需要相同的逻辑，那只需要把这个拦截器做在一个jar包里，声明是rose支持的包即可被使用。
+
+5.2 会被认成batch执行的sql返回
+------------------------------
+
+ 如果你的sql在执行update insert delete，并且dao的第一个参数是list类的多个值，那这条sql会被拆成多条sql依次执行，执行的结果会以各条sql的返回组成的数组返回。
+
+5.3 一个良好的大型WEB项目架构实践
+---------------------------------
+
+ 我们一般会把项目规定为：controller/service/biz/dao层，不能跨层调用，只在service层允许同时调用子层多个方法。
+
+
+rose手册第六章：附录
+====================
+
+ 附录里会有qieqie同学亲笔的rose编年史和发展规划。

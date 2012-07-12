@@ -8,8 +8,8 @@ do
 CHAPTER_FILE=../${CHAPTER}/README.md;
     if [ -f "${CHAPTER_FILE}" ]; then
         echo ${CHAPTER_FILE};
-	echo "## _EOF_
-## _NL_" >> rose-handbook.md;
+	echo "
+" >> rose-handbook.md;
         cat ${CHAPTER_FILE} >> rose-handbook.md;
     fi
 done;
