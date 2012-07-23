@@ -1,9 +1,13 @@
 rose手册计划
 ============
+* rose项目源代码地址：http://code.google.com/p/paoding-rose/
+
 * 目标：光大rose在国内java行业的使用，降低java入门。
 * 人人网、糯米网释出的、开源的高效Java web开发框架。在小米米聊服务端再次被验证和使用。一个从零开始的创业公司，在大家技术背景不一的情况下，rose很简单快速地传达到了大家中间。本手册致力于让php开发人员也能快速使用上java开发高性能服务。
 
 * 如果在阅读过程中有任何疑问，欢迎来信咨询：czhttp@gmail.com (或者在 http://www.54chen.com 留言)，将会第一时间得到答复。
+
+* 本文档同时提供了pdf和mobi文档下载: https://github.com/XiaoMi/rose/tree/master/ebook
 
 * 小米科技 bmw 团队荣誉出品。（BasicMiliaoWare）
  
@@ -31,6 +35,7 @@ rose手册计划
  * 5.1 如何打一个可被rose识别的jar包
  * 5.2 会被认成batch执行的sql返回
  * 5.3 一个良好的大型WEB项目架构实践
+ * 5.4 为何DAO不被初始化
 * rose手册第六章：附录
 
 
@@ -1578,6 +1583,11 @@ rose手册第五章：FAQ 常见问题
 ---------------------------------
 
  我们一般会把项目规定为：controller/service/biz/dao层，不能跨层调用，只在service层允许同时调用子层多个方法。
+
+5.4 为何DAO不被初始化
+---------------------
+
+ 相当多的初次使用DAO的朋友，会将XXXDAO写作XXXDao，注意大小写，只有DAO全大写时的class，才会被jade认识并扫描入环境中。
 
 
 rose手册第六章：附录
