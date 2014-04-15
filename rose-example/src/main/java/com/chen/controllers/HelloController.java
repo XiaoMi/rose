@@ -25,7 +25,13 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.multipart.MultipartFile;
+import sun.misc.BASE64Decoder;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
 
 @Path("")
 public class HelloController {
@@ -33,9 +39,16 @@ public class HelloController {
     @Autowired
     private TestService tService;
 
+
+
     @Get("")
-    public String index() {
-        return "@hello world";
+    public String index() throws IOException{
+        String re = new Scanner(new File("/root/temp.log")).useDelimiter("\\A").next();
+        BASE64Decoder d = new BASE64Decoder();
+        re = new String(d.decodeBuffer(re));
+        //String re = String.valueOf(Character.toChars(0x1F620));
+        tService.test();
+        return re;
     }
 
     @PriCheckRequired
@@ -71,19 +84,19 @@ public class HelloController {
         return "flash";
     }
 
-    @Get("/3.7")
-    public String portal(Portal portal) {
-        portal.addWindow("p1", "/wp1");
-        portal.addWindow("p2", "/wp2");
-        return "portal";
-    }
-
-    @Get("/3.8")
-    public String pipe(Pipe pipe) {
-        pipe.addWindow("p1", "/wp1");
-        pipe.addWindow("p2", "/wp2");
-        return "pipe";
-    }
+//    @Get("/3.7")
+//    public String portal(Portal portal) {
+//        portal.addWindow("p1", "/wp1");
+//        portal.addWindow("p2", "/wp2");
+//        return "portal";
+//    }
+//
+//    @Get("/3.8")
+//    public String pipe(Pipe pipe) {
+//        pipe.addWindow("p1", "/wp1");
+//        pipe.addWindow("p2", "/wp2");
+//        return "pipe";
+//    }
 
     @Get("/wp1")
     public String portal1() {

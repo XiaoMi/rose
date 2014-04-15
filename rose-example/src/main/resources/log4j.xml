@@ -10,7 +10,7 @@
  
 	
 	<root>
-		<level value="debug" />
+		<level value="error" />
 		<appender-ref ref="stdout" />
 	</root>
 </log4j:configuration>
