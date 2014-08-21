@@ -24,6 +24,7 @@ import net.paoding.rose.web.var.Flash;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.multipart.MultipartFile;
@@ -59,7 +60,9 @@ public class HelloController {
 
     @Get("/exception")
     public String index2() throws Exception {
-        return "@hello world";
+        JSONObject jo = new JSONObject();
+        jo.put("hello","world");
+        return "@json:"+jo;
     }
 
     @Get("/param")
