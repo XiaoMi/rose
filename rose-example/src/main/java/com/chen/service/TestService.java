@@ -8,7 +8,6 @@ import com.chen.dao.TestDAO;
 import com.chen.model.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,8 +15,6 @@ public class TestService {
 
     @Autowired
     private TestDAO testDAO;
-    @Autowired
-    private ThreadPoolTaskExecutor taskExecutor;
 
     public Test getTest() {
         return testDAO.getTest();
@@ -25,14 +22,5 @@ public class TestService {
 
     public void insertTest(Test test) {
         testDAO.insertTest(test);
-    }
-
-    public void test(){
-        taskExecutor.createThread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println(System.currentTimeMillis());
-            }
-        });
     }
 }

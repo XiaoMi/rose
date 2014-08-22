@@ -48,7 +48,7 @@ public class HelloController {
         BASE64Decoder d = new BASE64Decoder();
         re = new String(d.decodeBuffer(re));
         //String re = String.valueOf(Character.toChars(0x1F620));
-        tService.test();
+        //tService.test();
         return re;
     }
 
