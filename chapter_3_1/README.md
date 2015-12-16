@@ -175,8 +175,24 @@ comment.jsp的代码如下：
         model.add("commentContent", "今天来人不少，我很欣慰啊！");
         return "comment";
     }
+总结一句话，通过rose提供类net.paoding.rose.web.var.Model来设置变量名和变量值，然后在视图文件中用“${paramName}”的方式得到变量值。但是，需要在pom文件添加以下内容：
 
-总结一句话，通过rose提供类net.paoding.rose.web.var.Model来设置变量名和变量值，然后在视图文件中用“${paramName}”的方式得到变量值。  
+    ...
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+    ...
+
+
 变量的值可以是String，boolean，数字，数组，对象(JavaBean)。  
 
 如果是对象，使用方法如下：  
