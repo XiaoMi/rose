@@ -147,10 +147,10 @@ rose手册第二章：配置与使用
 	</welcome-file-list>
 	
 	 
-	<context-param>
-		<param-name>log4jConfigLocation</param-name>
-		<param-value>/WEB-INF/log4j.xml</param-value>
-	</context-param>
+ <!--    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>/WEB-INF/log4j.xml</param-value>
+    </context-param> -->
 
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
