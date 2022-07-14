@@ -56,7 +56,7 @@ public class Test2DAO {
       e.printStackTrace();
     }
     if (s == "") {
-      s = "Sucess " + String.format("Added %s %s %s %s %s.", emp_id, month, year, overtime);
+      s = "Sucess " + String.format("Added %s %s %s %s %s.", empid, month, year, overtime);
     }
     return s;
   }
